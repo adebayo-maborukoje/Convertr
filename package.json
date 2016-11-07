@@ -1,0 +1,22 @@
+{
+  "name": "currency-conveter",
+  "version": "1.0.0",
+  "description": "An app to convert any currency to USD",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andela-jkithome/Currency-converter.git"
+  },
+  "author": "Jeremy Kithome",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/andela-jkithome/Currency-converter/issues"
+  },
+  "homepage": "https://github.com/andela-jkithome/Currency-converter#readme",
+  "dependencies": {
+    "http-server": "^0.9.0"
+  }
+}
