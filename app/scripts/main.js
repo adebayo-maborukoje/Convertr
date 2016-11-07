@@ -4,7 +4,8 @@ const App = React.createClass({
       base: 'USD',
       symbol: null,
       currencies: null,
-      rate: null
+      rate: null,
+      value: null,
     }
   },
 
@@ -16,7 +17,6 @@ const App = React.createClass({
       return response.json()
     }).then(function(json) {
      that.setState({currencies : Object.keys(json.rates)})
-     console.log(that.state.currencies);
     }).catch(function(err) {
       alert('There was an erro fetching the currencies')
     })
@@ -24,7 +24,6 @@ const App = React.createClass({
 
   setSymbol(e) {
     let symbol = e.target.value;
-    console.log(symbol);
     this.setState({symbol: symbol})
   },
 
@@ -36,16 +35,16 @@ const App = React.createClass({
       return response.json()
     }).then(function(json) {
       let s = Object.keys(json.rates)[0];
-      console.log(s);
       let rate = json.rates[s];
-      console.log(rate)
       that.setState({rate: rate})
-      console.log(that.state.rate);
     }).catch(function(err) {
-      console.log(err);
       alert('There was an erro fetching the currencies')
     })
 
+  },
+
+  setValue(e) {
+    this.setState({value: e.target.value});
   },
 
   render: function() {
@@ -61,12 +60,19 @@ const App = React.createClass({
         <div className="row">
           <div className="col-md-4"></div>
           <div className="col-md-4">
+            <input type="number" placeholder="Choose a value" onChange={this.setValue} />
+          </div>
+          <div className="col-md-4"></div>
+        </div>
+        <div className="row">
+          <div className="col-md-4"></div>
+          <div className="col-md-4">
             {this.state.currencies ?
               <select style={{marginTop: '20px'}} onChange={this.setSymbol}>
                 <option value=''>Please choose a value</option>
                 {this.state.currencies.map(currency =>
                   {
-                 return <option value={currency}>{currency}</option>
+                 return <option key={currency} value={currency}>{currency}</option>
                 })}
               </select>
              :
@@ -85,7 +91,10 @@ const App = React.createClass({
           <div className="col-md-4"></div>
           <div className="col-md-4">
            {this.state.rate ?
-            <p>The {this.state.symbol} is exchanging at {this.state.rate} to the USD</p>
+            <div>
+              <p>The {this.state.symbol} is exchanging at {this.state.rate} to the USD</p>
+              <p>{this.state.value} {this.state.symbol} = {Math.round(this.state.value / this.state.rate)} USD</p>
+            </div>
             :
             <p>No conversion made yet</p>}
           </div>
