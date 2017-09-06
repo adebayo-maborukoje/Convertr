@@ -18,7 +18,7 @@ const App = React.createClass({
     }).then(function(json) {
      that.setState({currencies : Object.keys(json.rates)})
     }).catch(function(err) {
-      alert('There was an erro fetching the currencies')
+      alert('There was an error fetching the currencies')
     })
   },
 
@@ -38,7 +38,7 @@ const App = React.createClass({
       let rate = json.rates[s];
       that.setState({rate: rate})
     }).catch(function(err) {
-      alert('There was an erro fetching the currencies')
+      alert('There was an error fetching the currencies')
     })
 
   },
